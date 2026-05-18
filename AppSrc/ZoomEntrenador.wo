@@ -8,9 +8,12 @@ Use cWebMenuGroup.pkg
 Use cWebMenuItem.pkg
 Use cWebForm.pkg
 
+Use SelectEquipo.wo
+
 Use cligaDataDictionary.dd
 Use cequipoDataDictionary.dd
 Use centrenadorDataDictionary.dd
+Use cequipoDataDictionary.dd
 
 Object oZoomEntrenador is a cWebView
     Set piColumnCount to 12
@@ -42,6 +45,7 @@ Object oZoomEntrenador is a cWebView
 
         Object oentrenadorID is a cWebForm
             Entry_Item entrenador.ID
+            Set pbRender to False //Mantiene el ID, pero lo oculta en navegador
             Set piColumnSpan to 2
             Set piColumnIndex to 0
             Set peLabelPosition to lpTop
@@ -50,7 +54,7 @@ Object oZoomEntrenador is a cWebView
 
         Object oentrenadorNombre is a cWebForm
             Entry_Item entrenador.Nombre
-            Set piColumnSpan to 12
+            Set piColumnSpan to 6
             Set piColumnIndex to 0
             Set peLabelPosition to lpTop
             Set psLabel to "Nombre"
@@ -58,35 +62,54 @@ Object oZoomEntrenador is a cWebView
 
         Object oentrenadorApellido is a cWebForm
             Entry_Item entrenador.Apellido
-            Set piColumnSpan to 12
-            Set piColumnIndex to 0
+            Set piColumnSpan to 6
+            Set piColumnIndex to 6
             Set peLabelPosition to lpTop
             Set psLabel to "Apellido"
         End_Object 
 
-        Object oentrenadorNacionalidad is a cWebForm
-            Entry_Item entrenador.Nacionalidad
-            Set piColumnSpan to 10
-            Set piColumnIndex to 0
-            Set peLabelPosition to lpTop
-            Set psLabel to "Nacionalidad"
-        End_Object 
-
         Object oequipoID is a cWebForm
             Entry_Item equipo.ID
+            Set pbRender to False //Mantiene el ID, pero lo oculta en navegador
             Set piColumnSpan to 3
             Set piColumnIndex to 0
             Set peLabelPosition to lpTop
             Set psLabel to "EquipoID"
             Set pbPromptButton to True
+        End_Object
+            
+       // --- GRUPO DE DETALLES ---
+    Object oDetallesGroup is a cWebGroup
+        Set psCaption to "Detalles"
+        Set piColumnCount to 12
+        Set piColumnSpan to 12
+        
+        // Nacionalidad dentro del grupo
+        Object oNacionalidad_Form is a cWebForm
+            Entry_Item entrenador.Nacionalidad
+            Set piColumnSpan to 6
+            Set psLabel to "Nacionalidad"
+            Set peLabelPosition to lpTop
+        End_Object
 
-// ToDo: Fill in the from-child parent Select view object name for navigate forward
-//            WebRegisterPath ntNavigateForward oSelectView
+        // Equipo dentro del grupo
+        Object oEquipo_Form is a cWebForm
+            Entry_Item equipo.Nombre
+            Set piColumnSpan to 6
+            Set psLabel to "Equipo"
+            Set peLabelPosition to lpTop
+            Set pbPromptButton to True
+            Set pbReadOnly to True
+
+            //DESCOMENTADO
+            WebRegisterPath ntNavigateForward oSelectEquipo
 
             Procedure OnPrompt
                 Send NavigatePath
             End_Procedure
         End_Object 
+    End_Object
+        
     End_Object 
 
     Object oActionGroup is a cWebMenuGroup

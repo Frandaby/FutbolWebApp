@@ -9,6 +9,7 @@ Use cWebMenuItem.pkg
 Use cWebForm.pkg
 
 Use cposicionDataDictionary.dd
+Use cjugadorDataDictionary.dd
 
 Object oZoomPosicion is a cWebView
     Set piColumnCount to 12
@@ -32,6 +33,8 @@ Object oZoomPosicion is a cWebView
 
         Object oposicionID is a cWebForm
             Entry_Item posicion.ID
+            Set pbRender to False //Mantiene el ID, pero lo oculta en navegador
+            Set piColumnSpan to 2
             Set piColumnSpan to 2
             Set piColumnIndex to 0
             Set peLabelPosition to lpTop

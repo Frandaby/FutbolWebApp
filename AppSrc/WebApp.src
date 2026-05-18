@@ -60,9 +60,9 @@ Object oWebApp is a cWebApp
 
                         Procedure OnClick
                             Forward Send OnClick
-                                Send NavigatePath
+                            Send NavigatePath
                         End_Procedure
-                    End_Object
+                   End_Object
 
                     Object oSelectJugadorItem1 is a cWebMenuItem
                         Set psCaption to "SelectJugador"
@@ -70,7 +70,7 @@ Object oWebApp is a cWebApp
                         WebRegisterPath ntNavigateBegin oSelectJugador
 
                         Procedure OnClick
-                            Forward Send OnClick
+                                Forward Send OnClick
                                 Send NavigatePath
                         End_Procedure
                     End_Object

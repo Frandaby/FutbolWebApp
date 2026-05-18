@@ -10,6 +10,7 @@ Use cWebColumnButton.pkg
 Use cWebColumn.pkg
 
 Use cposicionDataDictionary.dd
+Use cjugadorDataDictionary.dd // Usamos dd de jugador para poder hacer navegación
 
 Object oSelectPosicion is a cWebView
     Set psCaption to "SelectPosicion"
@@ -21,9 +22,11 @@ Object oSelectPosicion is a cWebView
 
     Object oposicion_DD is a cposicionDataDictionary
     End_Object 
+    
+    
 
-    Set Main_DD To oposicion_DD
-    Set Server  To oposicion_DD
+    Set Main_DD to oposicion_DD
+    Set Server  to oposicion_DD
 
 
     Object oList is a cWebList
@@ -33,6 +36,10 @@ Object oSelectPosicion is a cWebView
         Set pbFillHeight to True
         Set pbShowHeader to False
         Set piSortColumn to 0
+        
+        
+        //AÑADIDO
+        WebRegisterPath ntNavigateForward oZoomPosicion
 
         Object oposicionID is a cWebColumn
             Entry_Item posicion.ID
@@ -50,7 +57,8 @@ Object oSelectPosicion is a cWebView
             Set peAlign to alignRight
 
 // ToDo: Fill in the from-main Zoom view object name for navigate forward
-//            WebRegisterPath ntNavigateForward oZoomView
+// DESCOMENTADO 
+            WebRegisterPath ntNavigateForward oZoomPosicion
 
             Procedure OnClick
                 Send NavigatePath
@@ -66,13 +74,13 @@ Object oSelectPosicion is a cWebView
             Entry_Item posicion.Nombre
             Set psCaption to "posicion.Nombre"
             Set piWidth to 621
-            Set pbNewLine to True
+            Set pbNewLine to False
         End_Object 
 
 // ToDo: Fill in the from-parent child Select view object name for navigate forward
 //        WebRegisterPath ntNavigateForward oSelectView
 
-        Procedure OnRowClick String sRowId
+       /* Procedure OnRowClick String sRowId
             tWebNavigateData NavigateData
             Get GetNavigateData to NavigateData
 
@@ -101,6 +109,11 @@ Error DFERR_PROGRAM "NavigateForward to this from-parent child Select view not y
 
         Procedure OnGetNavigateForwardData tWebNavigateData ByRef NavigateData Handle hoToView
             Move True to NavigateData.bReadOnly
+        End_Procedure */
+        
+        //AÑADIDO
+        Procedure OnRowClick String sRowId
+            Send NavigatePath
         End_Procedure
 
     End_Object 
@@ -122,7 +135,8 @@ Error DFERR_PROGRAM "NavigateForward to this from-parent child Select view not y
             Set psCaption to "New"
 
 // ToDo: Fill in the from-main Zoom view object name for navigate forward
-//            WebRegisterPath ntNavigateForward oZoomView
+// DESCOMENTADO y Custom AÑADIDO
+          WebRegisterPath ntNavigateForwardCustom oZoomPosicion
 
             Procedure OnClick
                 Send NavigatePath

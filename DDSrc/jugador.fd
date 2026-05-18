@@ -5,3 +5,4 @@
 #REPLACE jugador.Apellido |FS5,3
 #REPLACE jugador.Nacionalidad |FS5,4
 #REPLACE jugador.EquipoID |FN5,5
+#REPLACE jugador.PosicionID |FN5,6

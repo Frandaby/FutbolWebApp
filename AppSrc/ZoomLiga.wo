@@ -7,8 +7,11 @@ Use cWebPanel.pkg
 Use cWebMenuGroup.pkg
 Use cWebMenuItem.pkg
 Use cWebForm.pkg
+Use cWebList.pkg //AÑADIDO para poder hacer listas
+Use cWebColumn.pkg //AÑADIDO
 
 Use cligaDataDictionary.dd
+Use cequipoDataDictionary.dd
 
 Object oZoomLiga is a cWebView
     Set piColumnCount to 12
@@ -21,10 +24,13 @@ Object oZoomLiga is a cWebView
 
     Object oliga_DD is a cligaDataDictionary
     End_Object 
+    
+    Object oequipo_DD is a cequipoDataDictionary //Al trabajar de padre a hijo necesitamos los datos de equipo también
+        Set DDO_Server to oliga_DD 
+    End_Object
 
     Set Main_DD To oliga_DD
     Set Server  To oliga_DD
-
 
     Object oWebMainPanel is a cWebPanel
         Set piColumnCount to 12
@@ -32,6 +38,7 @@ Object oZoomLiga is a cWebView
 
         Object oligaID is a cWebForm
             Entry_Item liga.ID
+            Set pbRender to False //Mantiene el ID, pero lo oculta en navegador
             Set piColumnSpan to 2
             Set piColumnIndex to 0
             Set peLabelPosition to lpTop
@@ -68,10 +75,77 @@ Object oZoomLiga is a cWebView
             Set piColumnIndex to 0
             Set peLabelPosition to lpTop
             Set psLabel to "EquiposMax"
-        End_Object 
-    End_Object 
+        End_Object  
+        
+        Object oEquiposGroup is a cWebGroup
+            Set psCaption to "Equipos de esta liga"
+            Set piColumnSpan to 12
+            Set piColumnIndex to 0
+            
+            //Navega de Liga(Padre) a Equipo (Hijo)
+            Object oEquiposList is a cWebList  // 2º En vez del botón, en Zoom liga, los equipos de esa liga
+                Set Server to oequipo_DD
+                Set piHeight to 250
+                Set pbDataAware to True
+                
+                WebRegisterPath ntNavigateForward oSelectEquipo
+                
+                Object oequipoNombre is a cWebColumn
+                    Entry_Item equipo.Nombre
+                    Set psCaption to "Equipos"
+                End_Object
+                
+                Procedure OnRowClick String sRowId
+                    Send NavigatePath
+                End_Procedure
+
+                Procedure OnGetNavigateForwardData tWebNavigateData ByRef NavigateData Handle hoToView
+                    Move nfFromParent to NavigateData.eNavigateType
+                    Move True to NavigateData.bReadOnly
+                End_Procedure
+            End_Object
+
+            Object oVisualEquiposBtn is a cWebButton // 1º Botón en ZoomLiga que muestre los equipos de esa liga
+                Set psCaption to "Ver equipos"
+                Set piColumnSpan to 4 
+                Set piColumnIndex to 0
+                Set psCSSClass to "WebButton" 
+                
+
+                WebRegisterPath ntNavigateForward oSelectEquipo
+
+                Procedure OnClick
+                    Send NavigatePath
+                End_Procedure
+
+                Procedure OnGetNavigateForwardData tWebNavigateData ByRef NavigateData Handle hoToView
+                    Move nfFromParent to NavigateData.eNavigateType
+                    Move True to NavigateData.bReadOnly
+                End_Procedure
+            End_Object
+
+        End_Object
+        
+    End_Object
 
     Object oActionGroup is a cWebMenuGroup
+        
+        Object oEquiposBtn is a cWebMenuItem //Otro botón para Ver equipos, pero en los tres puntos de arriba
+            Set pbRender to True
+            Set psCaption to "Ver Equipos"
+        
+            WebRegisterPath ntNavigateForward oSelectEquipo
+        
+            Procedure OnClick
+                Send NavigatePath
+            End_Procedure
+            
+            Procedure OnGetNavigateForwardData tWebNavigateData ByRef NavigateData Handle hoToView
+                Move nfFromParent to NavigateData.eNavigateType 
+                Move True to NavigateData.bReadOnly
+            End_Procedure
+            
+        End_Object
 
         Object oSaveBtn is a cWebMenuItem
             Set psCSSClass to "WebSaveMenuItem"
@@ -158,6 +232,7 @@ Object oZoomLiga is a cWebView
 
             Case (NavigateData.eNavigateType = nfFromParent)
                 // If from parent, this is a constrained drill down.
+                Send Rebuild_Constraints of oequipo_DD
                 Case Break
 
             Case (NavigateData.eNavigateType = nfFromChild)
@@ -169,7 +244,10 @@ Object oZoomLiga is a cWebView
         Case End
 
         Send SetActionButtons
+        Send Rebuild_Constraints of oequipo_DD
+        Send SetActionButtons
+        WebSet pbRender of oEquiposBtn to True
 
     End_Procedure
-
+    
 End_Object 

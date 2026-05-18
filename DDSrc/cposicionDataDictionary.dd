@@ -2,6 +2,7 @@
 
 Open posicion
 Open jugadorposicion
+Open jugador
 
 Class cposicionDataDictionary is a DataDictionary
     
@@ -10,6 +11,7 @@ Class cposicionDataDictionary is a DataDictionary
         Set Main_File to posicion.File_Number
 
         Set Add_Client_File to jugadorposicion.File_Number
+        Set Add_Client_File to jugador.File_Number
 
         Set Foreign_Field_Option DD_KEYFIELD DD_NOPUT to True
         Set Foreign_Field_Option DD_KEYFIELD DD_FINDREQ to True

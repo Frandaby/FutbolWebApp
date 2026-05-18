@@ -8,9 +8,13 @@ Use cWebMenuGroup.pkg
 Use cWebMenuItem.pkg
 Use cWebForm.pkg
 
+Use SelectPosicion.wo
+Use SelectEquipo.wo
+
 Use cligaDataDictionary.dd
 Use cequipoDataDictionary.dd
-Use cjugadorDataDictionary.dd
+Use cjugadorDataDictionary.dd 
+Use cposicionDataDictionary.dd
 
 Object oZoomJugador is a cWebView
     Set piColumnCount to 12
@@ -22,72 +26,107 @@ Object oZoomJugador is a cWebView
     Set piMaxWidth to 1024
 
     Object oliga_DD is a cligaDataDictionary
-    End_Object 
-
+    End_Object
+    
     Object oequipo_DD is a cequipoDataDictionary
-        Set DDO_Server To oliga_DD
-    End_Object 
-
+        Set DDO_Server to oliga_DD
+    End_Object
+    
+    Object oPosicion_DD is a cPosicionDataDictionary
+    End_Object
+    
     Object ojugador_DD is a cjugadorDataDictionary
-        Set DDO_Server To oequipo_DD
-    End_Object 
+        Set DDO_Server to oequipo_DD
+        Set DDO_Server to oPosicion_DD
+    End_Object
 
-    Set Main_DD To ojugador_DD
-    Set Server  To ojugador_DD
-
+    Set Main_DD to ojugador_DD
+    Set Server  to ojugador_DD
 
     Object oWebMainPanel is a cWebPanel
         Set piColumnCount to 12
         WebSetResponsive piColumnCount rmMobile to 4
 
-        Object ojugadorID is a cWebForm
-            Entry_Item jugador.ID
-            Set piColumnSpan to 2
-            Set piColumnIndex to 0
-            Set peLabelPosition to lpTop
-            Set psLabel to "ID"
-        End_Object 
-
         Object ojugadorNombre is a cWebForm
             Entry_Item jugador.Nombre
-            Set piColumnSpan to 12
-            Set piColumnIndex to 0
-            Set peLabelPosition to lpTop
+            Set piColumnSpan to 6
             Set psLabel to "Nombre"
         End_Object 
 
         Object ojugadorApellido is a cWebForm
             Entry_Item jugador.Apellido
-            Set piColumnSpan to 12
-            Set piColumnIndex to 0
-            Set peLabelPosition to lpTop
+            Set piColumnSpan to 6
             Set psLabel to "Apellido"
         End_Object 
 
-        Object ojugadorNacionalidad is a cWebForm
-            Entry_Item jugador.Nacionalidad
-            Set piColumnSpan to 10
-            Set piColumnIndex to 0
-            Set peLabelPosition to lpTop
-            Set psLabel to "Nacionalidad"
+        Object oDetallesGroup is a cWebGroup
+            Set psCaption to "Ficha Técnica"
+            Set piColumnCount to 12
+            Set piColumnSpan to 12
+            
+            Object ojugadorNacionalidad is a cWebForm
+                Entry_Item jugador.Nacionalidad
+                Set piColumnSpan to 12
+                Set psLabel to "Nacionalidad"
+            End_Object 
+            
+            /*Jugador y Posicion tienen relación, pero no creamos esta en la BBDD de DataFlex anteriormente. 
+            Para poder relacionarlos, añadí PosicionID en la tabla de Jugador, de modo que pudiéramos
+            tener una buena navegación entre ellos */
+            
+            //De jugador (hijo) a posición (padre) : Botón para obtener la posición del jugador
+            
+            Object oPosicionNombre_Form is a cWebForm // Para obtener el nombre de la posición y poder buscar con la lupa
+                Entry_Item posicion.Nombre
+                Set piColumnSpan to 12
+                Set psLabel to "Posición en el campo"
+                Set pbPromptButton to True //Línea para activar la lupa de info
+                Set pbReadOnly to True 
+                
+                WebRegisterPath ntNavigateForward oSelectPosicion //Para ir a otra vista (SlectPosicion)
+
+                Procedure OnPrompt
+                    Send NavigatePath
+                End_Procedure
+            End_Object
+
+            Object oEquipoNombre_Form is a cWebForm
+                Entry_Item equipo.Nombre
+                Set piColumnSpan to 12
+                Set psLabel to "Equipo Actual"
+                Set pbPromptButton to True
+                Set pbReadOnly to True 
+
+                WebRegisterPath ntNavigateForward oSelectEquipo
+
+                Procedure OnPrompt
+                    Send NavigatePath
+                End_Procedure
+            End_Object 
         End_Object 
 
+        // IDs Ocultos (se quedan dentro del panel pero no se ven en navegador, por si queremos relacionar IDs)
+        Object ojugadorID is a cWebForm
+            Entry_Item jugador.ID
+            Set pbRender to False // Para ocultarlos de la vista en navegador
+        End_Object 
         Object oequipoID is a cWebForm
             Entry_Item equipo.ID
-            Set piColumnSpan to 3
-            Set piColumnIndex to 0
-            Set peLabelPosition to lpTop
-            Set psLabel to "EquipoID"
-            Set pbPromptButton to True
-
-// ToDo: Fill in the from-child parent Select view object name for navigate forward
-//            WebRegisterPath ntNavigateForward oSelectView
-
-            Procedure OnPrompt
-                Send NavigatePath
-            End_Procedure
+            Set pbRender to False
         End_Object 
-    End_Object 
+        Object oposicionID is a cWebForm
+            Set pbRender to True
+            Entry_Item posicion.ID
+        End_Object 
+        
+        Object oJugadorPosicionID is a cWebForm
+            Entry_Item jugador.PosicionID
+            Set pbRender to False
+            Set piColumnSpan to 12
+            Set psLabel to "Posición ID"
+        End_Object
+
+    End_Object
 
     Object oActionGroup is a cWebMenuGroup
 
