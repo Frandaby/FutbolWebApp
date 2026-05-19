@@ -25,7 +25,6 @@ Object oSelectLiga is a cWebView
     Set Main_DD To oliga_DD
     Set Server  To oliga_DD
 
-
     Object oList is a cWebList
         Set piColumnSpan to 0
         Set psCSSClass to "MobileList"
@@ -33,9 +32,8 @@ Object oSelectLiga is a cWebView
         Set pbFillHeight to True
         Set pbShowHeader to False
         Set piSortColumn to 0
-        
-        //AÑADIDO
-        WebRegisterPath ntNavigateForwardCustom oZoomLiga
+
+        WebRegisterPath ntNavigateForward oZoomLiga
 
         Object oligaID is a cWebColumn
             Entry_Item liga.ID
@@ -53,7 +51,6 @@ Object oSelectLiga is a cWebView
             Set peAlign to alignRight
 
            // ToDo: Fill in the from-main Zoom view object name for navigate forward
-           // DESCOMENTADO
            WebRegisterPath ntNavigateForward oZoomLiga 
 
             Procedure OnClick
@@ -93,42 +90,7 @@ Object oSelectLiga is a cWebView
             Set piWidth to 124
             Set pbNewLine to False
         End_Object 
-
-// ToDo: Fill in the from-parent child Select view object name for navigate forward
-//        WebRegisterPath ntNavigateForward oSelectView
-
-       /* Procedure OnRowClick String sRowId
-            tWebNavigateData NavigateData
-            Get GetNavigateData to NavigateData
-
-            Case Begin
-                Case (NavigateData.eNavigateType = nfFromParent)
-// ToDo: Fill in the from-parent child Select view object name for navigate forward
-Error DFERR_PROGRAM "NavigateForward to this from-parent child Select view not yet defined"
-//                    Send NavigateForward of oSelectView Self
-                    Case Break
-
-                Case (NavigateData.eNavigateType = nfFromChild)
-                    Send NavigateClose Self
-                    Case Break
-
-                Case (NavigateData.eNavigateType = nfFromMain)
-                    Send NavigateClose Self
-                    Case Break
-
-                Case Else // must be nfUndefined
-// ToDo: Fill in the from-parent child Select view object name for navigate forward
-Error DFERR_PROGRAM "NavigateForward to this from-parent child Select view not yet defined"
-//                    Send NavigateForward of oSelectView Self
-
-            Case End
-        End_Procedure
-
-        Procedure OnGetNavigateForwardData tWebNavigateData ByRef NavigateData Handle hoToView
-            Move True to NavigateData.bReadOnly
-        End_Procedure */
         
-        //AÑADIDO
         Procedure OnRowClick String sRowId
             Send NavigatePath
         End_Procedure
@@ -152,8 +114,7 @@ Error DFERR_PROGRAM "NavigateForward to this from-parent child Select view not y
             Set psCaption to "New"
 
            // ToDo: Fill in the from-main Zoom view object name for navigate forward
-           // DESCOMENTADO y Custom AÑADIDO
-           WebRegisterPath ntNavigateForwardCustom oZoomLiga
+           WebRegisterPath ntNavigateForward oZoomLiga
 
             Procedure OnClick
                 Send NavigatePath
@@ -191,5 +152,41 @@ Error DFERR_PROGRAM "NavigateForward to this from-parent child Select view not y
 
     End_Procedure
 
-
 End_Object 
+
+
+
+//CÓDIGO ANTIGUO DATAFLEX
+// ToDo: Fill in the from-parent child Select view object name for navigate forward
+//        WebRegisterPath ntNavigateForward oSelectView
+
+       /* Procedure OnRowClick String sRowId
+            tWebNavigateData NavigateData
+            Get GetNavigateData to NavigateData
+
+            Case Begin
+                Case (NavigateData.eNavigateType = nfFromParent)
+// ToDo: Fill in the from-parent child Select view object name for navigate forward
+Error DFERR_PROGRAM "NavigateForward to this from-parent child Select view not yet defined"
+//                    Send NavigateForward of oSelectView Self
+                    Case Break
+
+                Case (NavigateData.eNavigateType = nfFromChild)
+                    Send NavigateClose Self
+                    Case Break
+
+                Case (NavigateData.eNavigateType = nfFromMain)
+                    Send NavigateClose Self
+                    Case Break
+
+                Case Else // must be nfUndefined
+// ToDo: Fill in the from-parent child Select view object name for navigate forward
+Error DFERR_PROGRAM "NavigateForward to this from-parent child Select view not yet defined"
+//                    Send NavigateForward of oSelectView Self
+
+            Case End
+        End_Procedure
+
+        Procedure OnGetNavigateForwardData tWebNavigateData ByRef NavigateData Handle hoToView
+            Move True to NavigateData.bReadOnly
+        End_Procedure */

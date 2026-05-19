@@ -1,5 +1,5 @@
 Compiling Program: C:\DataFlex Projects\FutbolWebApp\AppSrc\WebApp.src
-Memory Available: 15898939392
+Memory Available: 16795013120
 1>Use AllWebAppClasses.pkg
 Using pre-compiled package ALLWEBAPPCLASSES.PKG
 Including file: AllWebAppClasses.x64.pkd    (C:\Program Files\DataFlex 25.0\Pkg\AllWebAppClasses.x64.pkd)
@@ -1693,8 +1693,7 @@ Including file: jugador.fd    (C:\DataFlex Projects\FutbolWebApp\DDSrc\jugador.f
 37534>>>>>>>        Set pbShowHeader to False
 37535>>>>>>>        Set piSortColumn to 0
 37536>>>>>>>        
-37536>>>>>>>        //AÑADIDO
-37536>>>>>>>        WebRegisterPath ntNavigateForwardCustom oZoomEquipo
+37536>>>>>>>        WebRegisterPath ntNavigateForward oZoomEquipo
 37542>>>>>>>
 37542>>>>>>>        Object oequipoID is a cWebColumn
 37544>>>>>>>            Entry_Item equipo.ID
@@ -1711,8 +1710,7 @@ Including file: jugador.fd    (C:\DataFlex Projects\FutbolWebApp\DDSrc\jugador.f
 37555>>>>>>>            Set psBtnCssClass to "WebButtonIcon WebIcon_Info"
 37556>>>>>>>            Set peAlign to alignRight
 37557>>>>>>>
-37557>>>>>>>// ToDo: Fill in the from-main Zoom view object name for navigate forward
-37557>>>>>>>// DESCOMENTADO
+37557>>>>>>>            // ToDo: Fill in the from-main Zoom view object name for navigate forward       
 37557>>>>>>>            WebRegisterPath ntNavigateForward oZoomEquipo
 37563>>>>>>>
 37563>>>>>>>            Procedure OnClick
@@ -1738,12 +1736,6 @@ Including file: jugador.fd    (C:\DataFlex Projects\FutbolWebApp\DDSrc\jugador.f
 37585>>>>>>>            Set piWidth to 124
 37586>>>>>>>            Set pbNewLine to False
 37587>>>>>>>        End_Object 
-37588>>>>>>>
-37588>>>>>>>// ToDo: Fill in the from-parent child Select view object name for navigate forward
-37588>>>>>>>
-37588>>>>>>>//      WebRegisterPath ntNavigateForward oSelectEquipo
-37588>>>>>>>
-37588>>>>>>>       /* Procedure OnRowClick String sRowId            tWebNavigateData NavigateData            Get GetNavigateData to NavigateData            Case Begin                Case (NavigateData.eNavigateType = nfFromParent)// ToDo: Fill in the from-parent child Select view object name for navigate forwardError DFERR_PROGRAM "NavigateForward to this from-parent child Select view not yet defined"//                    Send NavigateForward of oSelectView Self                    Case Break                Case (NavigateData.eNavigateType = nfFromChild)                    Send NavigateClose Self                    Case Break                Case (NavigateData.eNavigateType = nfFromMain)                    Send NavigateClose Self                    Case Break                Case Else // must be nfUndefined// ToDo: Fill in the from-parent child Select view object name for navigate forwardError DFERR_PROGRAM "NavigateForward to this from-parent child Select view not yet defined"//                    Send NavigateForward of oSelectView Self            Case End        End_Procedure */
 37588>>>>>>>        
 37588>>>>>>>        //AÑADIDO
 37588>>>>>>>        Procedure OnRowClick String sRowId
@@ -1768,9 +1760,8 @@ Including file: jugador.fd    (C:\DataFlex Projects\FutbolWebApp\DDSrc\jugador.f
 37608>>>>>>>            Set psCSSClass to "WebClearMenuItem"
 37609>>>>>>>            Set psCaption to "New"
 37610>>>>>>>
-37610>>>>>>>// ToDo: Fill in the from-main Zoom view object name for navigate forward
-37610>>>>>>>// DESCOMENTADO -Intercambio de información
-37610>>>>>>>            WebRegisterPath ntNavigateForwardCustom oZoomEquipo
+37610>>>>>>>            // ToDo: Fill in the from-main Zoom view object name for navigate forward
+37610>>>>>>>            WebRegisterPath ntNavigateForward oZoomEquipo
 37616>>>>>>>
 37616>>>>>>>            Procedure OnClick
 37619>>>>>>>                Send NavigatePath
@@ -1809,6 +1800,14 @@ Including file: jugador.fd    (C:\DataFlex Projects\FutbolWebApp\DDSrc\jugador.f
 37645>>>>>>>    End_Procedure
 37646>>>>>>>
 37646>>>>>>>End_Object 
+37647>>>>>>>
+37647>>>>>>>
+37647>>>>>>>//CÓDIGO ANTIGUO DATAFLEX
+37647>>>>>>>// ToDo: Fill in the from-parent child Select view object name for navigate forward
+37647>>>>>>>
+37647>>>>>>>//      WebRegisterPath ntNavigateForward oSelectEquipo
+37647>>>>>>>
+37647>>>>>>>       /* Procedure OnRowClick String sRowId            tWebNavigateData NavigateData            Get GetNavigateData to NavigateData            Case Begin                Case (NavigateData.eNavigateType = nfFromParent)// ToDo: Fill in the from-parent child Select view object name for navigate forwardError DFERR_PROGRAM "NavigateForward to this from-parent child Select view not yet defined"//                    Send NavigateForward of oSelectView Self                    Case Break                Case (NavigateData.eNavigateType = nfFromChild)                    Send NavigateClose Self                    Case Break                Case (NavigateData.eNavigateType = nfFromMain)                    Send NavigateClose Self                    Case Break                Case Else // must be nfUndefined// ToDo: Fill in the from-parent child Select view object name for navigate forwardError DFERR_PROGRAM "NavigateForward to this from-parent child Select view not yet defined"//                    Send NavigateForward of oSelectView Self            Case End        End_Procedure */
 37647>>>>>
 37647>>>>>Use cligaDataDictionary.dd
 37647>>>>>Use cequipoDataDictionary.dd
@@ -1869,34 +1868,34 @@ Including file: hijoentrenador.fd    (C:\DataFlex Projects\FutbolWebApp\DDSrc\hi
 37691>>>>>        Set piColumnCount to 12
 37692>>>>>        WebSetResponsive piColumnCount rmMobile to 4
 37693>>>>>
-37693>>>>>        Object oentrenadorID is a cWebForm
-37695>>>>>            Entry_Item entrenador.ID
-37696>>>>>            Set pbRender to False //Mantiene el ID, pero lo oculta en navegador
-37697>>>>>            Set piColumnSpan to 2
-37698>>>>>            Set piColumnIndex to 0
-37699>>>>>            Set peLabelPosition to lpTop
-37700>>>>>            Set psLabel to "ID"
-37701>>>>>        End_Object 
-37702>>>>>
-37702>>>>>        Object oentrenadorNombre is a cWebForm
-37704>>>>>            Entry_Item entrenador.Nombre
-37705>>>>>            Set piColumnSpan to 6
-37706>>>>>            Set piColumnIndex to 0
-37707>>>>>            Set peLabelPosition to lpTop
-37708>>>>>            Set psLabel to "Nombre"
-37709>>>>>        End_Object 
-37710>>>>>
-37710>>>>>        Object oentrenadorApellido is a cWebForm
-37712>>>>>            Entry_Item entrenador.Apellido
-37713>>>>>            Set piColumnSpan to 6
-37714>>>>>            Set piColumnIndex to 6
+37693>>>>>        Object oentrenadorNombre is a cWebForm
+37695>>>>>            Entry_Item entrenador.Nombre
+37696>>>>>            Set piColumnSpan to 6
+37697>>>>>            Set piColumnIndex to 0
+37698>>>>>            Set peLabelPosition to lpTop
+37699>>>>>            Set psLabel to "Nombre"
+37700>>>>>        End_Object 
+37701>>>>>
+37701>>>>>        Object oentrenadorApellido is a cWebForm
+37703>>>>>            Entry_Item entrenador.Apellido
+37704>>>>>            Set piColumnSpan to 6
+37705>>>>>            Set piColumnIndex to 6
+37706>>>>>            Set peLabelPosition to lpTop
+37707>>>>>            Set psLabel to "Apellido"
+37708>>>>>        End_Object 
+37709>>>>>              
+37709>>>>>        Object oentrenadorID is a cWebForm
+37711>>>>>            Entry_Item entrenador.ID
+37712>>>>>            Set pbRender to False //Mantiene el ID, pero lo oculta en navegador
+37713>>>>>            Set piColumnSpan to 2
+37714>>>>>            Set piColumnIndex to 0
 37715>>>>>            Set peLabelPosition to lpTop
-37716>>>>>            Set psLabel to "Apellido"
+37716>>>>>            Set psLabel to "ID"
 37717>>>>>        End_Object 
-37718>>>>>
+37718>>>>>        
 37718>>>>>        Object oequipoID is a cWebForm
 37720>>>>>            Entry_Item equipo.ID
-37721>>>>>            Set pbRender to False //Mantiene el ID, pero lo oculta en navegador
+37721>>>>>            Set pbRender to False 
 37722>>>>>            Set piColumnSpan to 3
 37723>>>>>            Set piColumnIndex to 0
 37724>>>>>            Set peLabelPosition to lpTop
@@ -1904,13 +1903,12 @@ Including file: hijoentrenador.fd    (C:\DataFlex Projects\FutbolWebApp\DDSrc\hi
 37726>>>>>            Set pbPromptButton to True
 37727>>>>>        End_Object
 37728>>>>>            
-37728>>>>>       // --- GRUPO DE DETALLES ---
+37728>>>>>    // GRUPO DE DETALLES
 37728>>>>>    Object oDetallesGroup is a cWebGroup
 37730>>>>>        Set psCaption to "Detalles"
 37731>>>>>        Set piColumnCount to 12
 37732>>>>>        Set piColumnSpan to 12
-37733>>>>>        
-37733>>>>>        // Nacionalidad dentro del grupo
+37733>>>>>
 37733>>>>>        Object oNacionalidad_Form is a cWebForm
 37735>>>>>            Entry_Item entrenador.Nacionalidad
 37736>>>>>            Set piColumnSpan to 6
@@ -1918,7 +1916,6 @@ Including file: hijoentrenador.fd    (C:\DataFlex Projects\FutbolWebApp\DDSrc\hi
 37738>>>>>            Set peLabelPosition to lpTop
 37739>>>>>        End_Object
 37740>>>>>
-37740>>>>>        // Equipo dentro del grupo
 37740>>>>>        Object oEquipo_Form is a cWebForm
 37742>>>>>            Entry_Item equipo.Nombre
 37743>>>>>            Set piColumnSpan to 6
@@ -1927,7 +1924,6 @@ Including file: hijoentrenador.fd    (C:\DataFlex Projects\FutbolWebApp\DDSrc\hi
 37746>>>>>            Set pbPromptButton to True
 37747>>>>>            Set pbReadOnly to True
 37748>>>>>
-37748>>>>>            //DESCOMENTADO
 37748>>>>>            WebRegisterPath ntNavigateForward oSelectEquipo
 37754>>>>>
 37754>>>>>            Procedure OnPrompt
@@ -2071,7 +2067,7 @@ Including file: hijoentrenador.fd    (C:\DataFlex Projects\FutbolWebApp\DDSrc\hi
 37873>>>    Set Server  To oentrenador_DD
 37874>>>
 37874>>>
-37874>>>    Object oList is a cWebList
+37874>>>    Object oList is a cWebList          //Invoking object que permite viajar a Zoom. 
 37876>>>        Set piColumnSpan to 0
 37877>>>        Set psCSSClass to "MobileList"
 37878>>>        Set pbServerOnRowClick to True
@@ -2079,8 +2075,7 @@ Including file: hijoentrenador.fd    (C:\DataFlex Projects\FutbolWebApp\DDSrc\hi
 37880>>>        Set pbShowHeader to False
 37881>>>        Set piSortColumn to 0
 37882>>>        
-37882>>>        //AÑADIDO
-37882>>>        WebRegisterPath ntNavigateForwardCustom oZoomEntrenador
+37882>>>        WebRegisterPath ntNavigateForward oZoomEntrenador
 37888>>>
 37888>>>        Object oentrenadorNombre is a cWebColumn
 37890>>>            Entry_Item entrenador.Nombre
@@ -2106,7 +2101,7 @@ Including file: hijoentrenador.fd    (C:\DataFlex Projects\FutbolWebApp\DDSrc\hi
 37910>>>            Set peAlign to alignLeft
 37911>>>        End_Object
 37912>>>
-37912>>>        Object oDetailButton is a cWebColumnButton
+37912>>>        Object oDetailButton is a cWebColumnButton         //Invoking Object, para el botón de la lupa
 37914>>>            Set psCaption to "btn"
 37915>>>            Set piWidth to 45
 37916>>>            Set pbFixedWidth to True
@@ -2115,9 +2110,7 @@ Including file: hijoentrenador.fd    (C:\DataFlex Projects\FutbolWebApp\DDSrc\hi
 37919>>>            Set psBtnCssClass to "WebButtonIcon WebIcon_Info"
 37920>>>            Set peAlign to alignRight
 37921>>>
-37921>>>// ToDo: Fill in the from-main Zoom view object name for navigate forward
-37921>>>// DESCOMENTADO
-37921>>>
+37921>>>           // ToDo: Fill in the from-main Zoom view object name for navigate forward
 37921>>>           WebRegisterPath ntNavigateForward oZoomEntrenador
 37927>>>
 37927>>>            Procedure OnClick
@@ -2157,14 +2150,7 @@ Including file: hijoentrenador.fd    (C:\DataFlex Projects\FutbolWebApp\DDSrc\hi
 37963>>>            Set piWidth to 124
 37964>>>            Set pbNewLine to False
 37965>>>        End_Object 
-37966>>>
-37966>>>// ToDo: Fill in the from-parent child Select view object name for navigate forward
-37966>>>
-37966>>>       // WebRegisterPath ntNavigateForward oSelectEntrenador
-37966>>>
-37966>>>        /*Procedure OnRowClick String sRowId            tWebNavigateData NavigateData            Get GetNavigateData to NavigateData            Case Begin                Case (NavigateData.eNavigateType = nfFromParent)// ToDo: Fill in the from-parent child Select view object name for navigate forwardError DFERR_PROGRAM "NavigateForward to this from-parent child Select view not yet defined"//                    Send NavigateForward of oSelectView Self                    Case Break                Case (NavigateData.eNavigateType = nfFromChild)                    Send NavigateClose Self                    Case Break                Case (NavigateData.eNavigateType = nfFromMain)                    Send NavigateClose Self                    Case Break                Case Else // must be nfUndefined// ToDo: Fill in the from-parent child Select view object name for navigate forwardError DFERR_PROGRAM "NavigateForward to this from-parent child Select view not yet defined"//                    Send NavigateForward of oSelectView Self            Case End        End_Procedure                Procedure OnGetNavigateForwardData tWebNavigateData ByRef NavigateData Handle hoToView            Move True to NavigateData.bReadOnly        End_Procedure*/
 37966>>>        
-37966>>>       //AÑADIDO
 37966>>>        Procedure OnRowClick String sRowId
 37969>>>            Send NavigatePath
 37970>>>        End_Procedure
@@ -2183,13 +2169,12 @@ Including file: hijoentrenador.fd    (C:\DataFlex Projects\FutbolWebApp\DDSrc\hi
 37983>>>
 37983>>>        End_Object 
 37984>>>
-37984>>>        Object oNewButton is a cWebMenuItem
+37984>>>        Object oNewButton is a cWebMenuItem         //Invoking Object para poder crear nuevos registros si los queremos
 37986>>>            Set psCSSClass to "WebClearMenuItem"
 37987>>>            Set psCaption to "New"
 37988>>>
-37988>>>    // ToDo: Fill in the from-main Zoom view object name for navigate forward
-37988>>>    //DESCOMENTADO y Custom AÑADIDO
-37988>>>            WebRegisterPath ntNavigateForwardCustom oZoomEntrenador
+37988>>>            // ToDo: Fill in the from-main Zoom view object name for navigate forward
+37988>>>            WebRegisterPath ntNavigateForward oZoomEntrenador
 37994>>>
 37994>>>            Procedure OnClick
 37997>>>                Send NavigatePath
@@ -2227,8 +2212,18 @@ Including file: hijoentrenador.fd    (C:\DataFlex Projects\FutbolWebApp\DDSrc\hi
 38023>>>
 38023>>>    End_Procedure
 38024>>>
-38024>>>
 38024>>>End_Object 
+38025>>>
+38025>>>
+38025>>>
+38025>>>//CÓDIGO ANTIGUO DATAFLEX
+38025>>>
+38025>>>
+38025>>>// ToDo: Fill in the from-parent child Select view object name for navigate forward
+38025>>>
+38025>>>       // WebRegisterPath ntNavigateForward oSelectEntrenador
+38025>>>
+38025>>>        /*Procedure OnRowClick String sRowId            tWebNavigateData NavigateData            Get GetNavigateData to NavigateData            Case Begin                Case (NavigateData.eNavigateType = nfFromParent)// ToDo: Fill in the from-parent child Select view object name for navigate forwardError DFERR_PROGRAM "NavigateForward to this from-parent child Select view not yet defined"//                    Send NavigateForward of oSelectView Self                    Case Break                Case (NavigateData.eNavigateType = nfFromChild)                    Send NavigateClose Self                    Case Break                Case (NavigateData.eNavigateType = nfFromMain)                    Send NavigateClose Self                    Case Break                Case Else // must be nfUndefined// ToDo: Fill in the from-parent child Select view object name for navigate forwardError DFERR_PROGRAM "NavigateForward to this from-parent child Select view not yet defined"//                    Send NavigateForward of oSelectView Self            Case End        End_Procedure                Procedure OnGetNavigateForwardData tWebNavigateData ByRef NavigateData Handle hoToView            Move True to NavigateData.bReadOnly        End_Procedure*/
 38025>    Use ZoomEntrenador.wo
 38025>    Use SelectJugador.wo
 Including file: SelectJugador.wo    (C:\DataFlex Projects\FutbolWebApp\AppSrc\SelectJugador.wo)
@@ -2334,7 +2329,6 @@ Including file: cposicionDataDictionary.dd    (C:\DataFlex Projects\FutbolWebApp
 38098>>>        Set pbShowHeader to False
 38099>>>        Set piSortColumn to 0
 38100>>>
-38100>>>        // AÑADIDO
 38100>>>        WebRegisterPath ntNavigateForward oZoomJugador
 38106>>>        
 38106>>>        Object ojugadorID is a cWebColumn
@@ -2352,8 +2346,7 @@ Including file: cposicionDataDictionary.dd    (C:\DataFlex Projects\FutbolWebApp
 38119>>>            Set psBtnCssClass to "WebButtonIcon WebIcon_Info"
 38120>>>            Set peAlign to alignRight
 38121>>>
-38121>>>// ToDo: Fill in the from-main Zoom view object name for navigate forward
-38121>>>// DESCOMENTADO
+38121>>>           // ToDo: Fill in the from-main Zoom view object name for navigate forward
 38121>>>           WebRegisterPath ntNavigateForward oZoomJugador
 38127>>>
 38127>>>            Procedure OnClick
@@ -2393,13 +2386,7 @@ Including file: cposicionDataDictionary.dd    (C:\DataFlex Projects\FutbolWebApp
 38163>>>            Set piWidth to 124
 38164>>>            Set pbNewLine to False
 38165>>>        End_Object 
-38166>>>
-38166>>>// ToDo: Fill in the from-parent child Select view object name for navigate forward
-38166>>>//        WebRegisterPath ntNavigateForward oSelectView
-38166>>>
-38166>>>       /* Procedure OnRowClick String sRowId            tWebNavigateData NavigateData            Get GetNavigateData to NavigateData            Case Begin                Case (NavigateData.eNavigateType = nfFromParent)// ToDo: Fill in the from-parent child Select view object name for navigate forwardError DFERR_PROGRAM "NavigateForward to this from-parent child Select view not yet defined"//                    Send NavigateForward of oSelectView Self                    Case Break                Case (NavigateData.eNavigateType = nfFromChild)                    Send NavigateClose Self                    Case Break                Case (NavigateData.eNavigateType = nfFromMain)                    Send NavigateClose Self                    Case Break                Case Else // must be nfUndefined// ToDo: Fill in the from-parent child Select view object name for navigate forwardError DFERR_PROGRAM "NavigateForward to this from-parent child Select view not yet defined"//                    Send NavigateForward of oSelectView Self            Case End        End_Procedure         Procedure OnGetNavigateForwardData tWebNavigateData ByRef NavigateData Handle hoToView            Move True to NavigateData.bReadOnly        End_Procedure */
 38166>>>        
-38166>>>        //AÑADIDO
 38166>>>        Procedure OnRowClick String sRowId
 38169>>>            Send NavigatePath
 38170>>>        End_Procedure
@@ -2422,9 +2409,8 @@ Including file: cposicionDataDictionary.dd    (C:\DataFlex Projects\FutbolWebApp
 38186>>>            Set psCSSClass to "WebClearMenuItem"
 38187>>>            Set psCaption to "New"
 38188>>>
-38188>>>// ToDo: Fill in the from-main Zoom view object name for navigate forward
-38188>>>// DESCOMENTADO y Custom AÑADIDO
-38188>>>            WebRegisterPath ntNavigateForwardCustom oZoomJugador
+38188>>>            // ToDo: Fill in the from-main Zoom view object name for navigate forward
+38188>>>            WebRegisterPath ntNavigateForward oZoomJugador
 38194>>>
 38194>>>            Procedure OnClick
 38197>>>                Send NavigatePath
@@ -2464,6 +2450,12 @@ Including file: cposicionDataDictionary.dd    (C:\DataFlex Projects\FutbolWebApp
 38224>>>
 38224>>>
 38224>>>End_Object 
+38225>>>
+38225>>>
+38225>>>// ToDo: Fill in the from-parent child Select view object name for navigate forward
+38225>>>//        WebRegisterPath ntNavigateForward oSelectView
+38225>>>
+38225>>>       /* Procedure OnRowClick String sRowId            tWebNavigateData NavigateData            Get GetNavigateData to NavigateData            Case Begin                Case (NavigateData.eNavigateType = nfFromParent)// ToDo: Fill in the from-parent child Select view object name for navigate forwardError DFERR_PROGRAM "NavigateForward to this from-parent child Select view not yet defined"//                    Send NavigateForward of oSelectView Self                    Case Break                Case (NavigateData.eNavigateType = nfFromChild)                    Send NavigateClose Self                    Case Break                Case (NavigateData.eNavigateType = nfFromMain)                    Send NavigateClose Self                    Case Break                Case Else // must be nfUndefined// ToDo: Fill in the from-parent child Select view object name for navigate forwardError DFERR_PROGRAM "NavigateForward to this from-parent child Select view not yet defined"//                    Send NavigateForward of oSelectView Self            Case End        End_Procedure         Procedure OnGetNavigateForwardData tWebNavigateData ByRef NavigateData Handle hoToView            Move True to NavigateData.bReadOnly        End_Procedure */
 38225>    Use ZoomJugador.wo
 Including file: ZoomJugador.wo    (C:\DataFlex Projects\FutbolWebApp\AppSrc\ZoomJugador.wo)
 38225>>>// C:\DataFlex Projects\FutbolWebApp\AppSrc\ZoomJugador.wo
@@ -2490,7 +2482,7 @@ Including file: SelectPosicion.wo    (C:\DataFlex Projects\FutbolWebApp\AppSrc\S
 38225>>>>>Use cWebColumn.pkg
 38225>>>>>
 38225>>>>>Use cposicionDataDictionary.dd
-38225>>>>>Use cjugadorDataDictionary.dd // Usamos dd de jugador paar poder hacer navegación
+38225>>>>>Use cjugadorDataDictionary.dd // Usamos dd de jugador para poder hacer navegación
 38225>>>>>
 38225>>>>>Object oSelectPosicion is a cWebView
 38227>>>>>    Set psCaption to "SelectPosicion"
@@ -2503,11 +2495,8 @@ Including file: SelectPosicion.wo    (C:\DataFlex Projects\FutbolWebApp\AppSrc\S
 38233>>>>>    Object oposicion_DD is a cposicionDataDictionary
 38235>>>>>    End_Object 
 38236>>>>>    
-38236>>>>>    
-38236>>>>>
 38236>>>>>    Set Main_DD to oposicion_DD
 38237>>>>>    Set Server  to oposicion_DD
-38238>>>>>
 38238>>>>>
 38238>>>>>    Object oList is a cWebList
 38240>>>>>        Set piColumnSpan to 0
@@ -2516,9 +2505,7 @@ Including file: SelectPosicion.wo    (C:\DataFlex Projects\FutbolWebApp\AppSrc\S
 38243>>>>>        Set pbFillHeight to True
 38244>>>>>        Set pbShowHeader to False
 38245>>>>>        Set piSortColumn to 0
-38246>>>>>        
-38246>>>>>        
-38246>>>>>        //AÑADIDO
+38246>>>>>
 38246>>>>>        WebRegisterPath ntNavigateForward oZoomPosicion
 38252>>>>>
 38252>>>>>        Object oposicionID is a cWebColumn
@@ -2536,8 +2523,7 @@ Including file: SelectPosicion.wo    (C:\DataFlex Projects\FutbolWebApp\AppSrc\S
 38265>>>>>            Set psBtnCssClass to "WebButtonIcon WebIcon_Info"
 38266>>>>>            Set peAlign to alignRight
 38267>>>>>
-38267>>>>>// ToDo: Fill in the from-main Zoom view object name for navigate forward
-38267>>>>>// DESCOMENTADO 
+38267>>>>>            // ToDo: Fill in the from-main Zoom view object name for navigate forward
 38267>>>>>            WebRegisterPath ntNavigateForward oZoomPosicion
 38273>>>>>
 38273>>>>>            Procedure OnClick
@@ -2556,11 +2542,6 @@ Including file: SelectPosicion.wo    (C:\DataFlex Projects\FutbolWebApp\AppSrc\S
 38288>>>>>            Set piWidth to 621
 38289>>>>>            Set pbNewLine to False
 38290>>>>>        End_Object 
-38291>>>>>
-38291>>>>>// ToDo: Fill in the from-parent child Select view object name for navigate forward
-38291>>>>>//        WebRegisterPath ntNavigateForward oSelectView
-38291>>>>>
-38291>>>>>       /* Procedure OnRowClick String sRowId            tWebNavigateData NavigateData            Get GetNavigateData to NavigateData            Case Begin                Case (NavigateData.eNavigateType = nfFromParent)// ToDo: Fill in the from-parent child Select view object name for navigate forwardError DFERR_PROGRAM "NavigateForward to this from-parent child Select view not yet defined"//                    Send NavigateForward of oSelectView Self                    Case Break                Case (NavigateData.eNavigateType = nfFromChild)                    Send NavigateClose Self                    Case Break                Case (NavigateData.eNavigateType = nfFromMain)                    Send NavigateClose Self                    Case Break                Case Else // must be nfUndefined// ToDo: Fill in the from-parent child Select view object name for navigate forwardError DFERR_PROGRAM "NavigateForward to this from-parent child Select view not yet defined"//                    Send NavigateForward of oSelectView Self            Case End        End_Procedure        Procedure OnGetNavigateForwardData tWebNavigateData ByRef NavigateData Handle hoToView            Move True to NavigateData.bReadOnly        End_Procedure */
 38291>>>>>        
 38291>>>>>        //AÑADIDO
 38291>>>>>        Procedure OnRowClick String sRowId
@@ -2585,9 +2566,8 @@ Including file: SelectPosicion.wo    (C:\DataFlex Projects\FutbolWebApp\AppSrc\S
 38311>>>>>            Set psCSSClass to "WebClearMenuItem"
 38312>>>>>            Set psCaption to "New"
 38313>>>>>
-38313>>>>>// ToDo: Fill in the from-main Zoom view object name for navigate forward
-38313>>>>>// DESCOMENTADO y Custom AÑADIDO
-38313>>>>>          WebRegisterPath ntNavigateForwardCustom oZoomPosicion
+38313>>>>>          // ToDo: Fill in the from-main Zoom view object name for navigate forward
+38313>>>>>          WebRegisterPath ntNavigateForward oZoomPosicion
 38319>>>>>
 38319>>>>>            Procedure OnClick
 38322>>>>>                Send NavigatePath
@@ -2625,8 +2605,15 @@ Including file: SelectPosicion.wo    (C:\DataFlex Projects\FutbolWebApp\AppSrc\S
 38348>>>>>
 38348>>>>>    End_Procedure
 38349>>>>>
-38349>>>>>
 38349>>>>>End_Object 
+38350>>>>>
+38350>>>>>
+38350>>>>>
+38350>>>>>// CÓDIGO ANTIGUO DATAFLEX
+38350>>>>>// ToDo: Fill in the from-parent child Select view object name for navigate forward
+38350>>>>>//        WebRegisterPath ntNavigateForward oSelectView
+38350>>>>>
+38350>>>>>       /* Procedure OnRowClick String sRowId            tWebNavigateData NavigateData            Get GetNavigateData to NavigateData            Case Begin                Case (NavigateData.eNavigateType = nfFromParent)// ToDo: Fill in the from-parent child Select view object name for navigate forwardError DFERR_PROGRAM "NavigateForward to this from-parent child Select view not yet defined"//                    Send NavigateForward of oSelectView Self                    Case Break                Case (NavigateData.eNavigateType = nfFromChild)                    Send NavigateClose Self                    Case Break                Case (NavigateData.eNavigateType = nfFromMain)                    Send NavigateClose Self                    Case Break                Case Else // must be nfUndefined// ToDo: Fill in the from-parent child Select view object name for navigate forwardError DFERR_PROGRAM "NavigateForward to this from-parent child Select view not yet defined"//                    Send NavigateForward of oSelectView Self            Case End        End_Procedure        Procedure OnGetNavigateForwardData tWebNavigateData ByRef NavigateData Handle hoToView            Move True to NavigateData.bReadOnly        End_Procedure */
 38350>>>Use SelectEquipo.wo
 38350>>>
 38350>>>Use cligaDataDictionary.dd
@@ -2688,7 +2675,10 @@ Including file: SelectPosicion.wo    (C:\DataFlex Projects\FutbolWebApp\AppSrc\S
 38401>>>                Set psLabel to "Nacionalidad"
 38402>>>            End_Object 
 38403>>>            
-38403>>>            //De jugador (hijo) a posición (padre) 
+38403>>>            /*Jugador y Posicion tienen relación, pero no creamos esta en la BBDD de DataFlex anteriormente.             Para poder relacionarlos, añadí PosicionID en la tabla de Jugador, de modo que pudiéramos            tener una buena navegación entre ellos */
+38403>>>            
+38403>>>            //De jugador (hijo) a posición (padre) : Botón para obtener la posición del jugador
+38403>>>            
 38403>>>            Object oPosicionNombre_Form is a cWebForm // Para obtener el nombre de la posición y poder buscar con la lupa
 38405>>>                Entry_Item posicion.Nombre
 38406>>>                Set piColumnSpan to 12
@@ -2710,7 +2700,7 @@ Including file: SelectPosicion.wo    (C:\DataFlex Projects\FutbolWebApp\AppSrc\S
 38427>>>                Set pbPromptButton to True
 38428>>>                Set pbReadOnly to True 
 38429>>>
-38429>>>                WebRegisterPath ntNavigateForward oSelectEquipo
+38429>>>                WebRegisterPath ntNavigateForward oSelectEquipo // Para ir a SelectEquipo
 38435>>>
 38435>>>                Procedure OnPrompt
 38438>>>                    Send NavigatePath
@@ -2718,7 +2708,7 @@ Including file: SelectPosicion.wo    (C:\DataFlex Projects\FutbolWebApp\AppSrc\S
 38440>>>            End_Object 
 38441>>>        End_Object 
 38442>>>
-38442>>>        // IDs Ocultos (se quedan dentro del panel pero no se ven en navegador, por si queremos relacionar IDs)
+38442>>>        // Podemos ocultar los ID de la UI pero sin eliminarlos, por si queremos utilizarlos o relacionarlos 
 38442>>>        Object ojugadorID is a cWebForm
 38444>>>            Entry_Item jugador.ID
 38445>>>            Set pbRender to False // Para ocultarlos de la vista en navegador
@@ -2884,7 +2874,7 @@ Including file: ZoomPosicion.wo    (C:\DataFlex Projects\FutbolWebApp\AppSrc\Zoo
 38574>>>
 38574>>>        Object oposicionID is a cWebForm
 38576>>>            Entry_Item posicion.ID
-38577>>>            Set pbRender to False //Mantiene el ID, pero lo oculta en navegador
+38577>>>            Set pbRender to False 
 38578>>>            Set piColumnSpan to 2
 38579>>>            Set piColumnSpan to 2
 38580>>>            Set piColumnIndex to 0
@@ -3046,27 +3036,27 @@ Including file: ZoomEquipo.wo    (C:\DataFlex Projects\FutbolWebApp\AppSrc\ZoomE
 38704>>>        Set piColumnCount to 12
 38705>>>        WebSetResponsive piColumnCount rmMobile to 4
 38706>>>
-38706>>>        Object oequipoID is a cWebForm
-38708>>>            Entry_Item equipo.ID
-38709>>>            Set pbRender to False //Mantiene el ID, pero lo oculta en navegador
-38710>>>            Set piColumnSpan to 2
-38711>>>            Set piColumnSpan to 2
-38712>>>            Set piColumnIndex to 0
-38713>>>            Set peLabelPosition to lpTop
-38714>>>            Set psLabel to "ID"
-38715>>>        End_Object 
-38716>>>
-38716>>>        Object oequipoNombre is a cWebForm
-38718>>>            Entry_Item equipo.Nombre
-38719>>>            Set piColumnSpan to 12
+38706>>>        Object oequipoNombre is a cWebForm
+38708>>>            Entry_Item equipo.Nombre
+38709>>>            Set piColumnSpan to 12
+38710>>>            Set piColumnIndex to 0
+38711>>>            Set peLabelPosition to lpTop
+38712>>>            Set psLabel to "Nombre del equipo"
+38713>>>        End_Object 
+38714>>>           
+38714>>>        Object oequipoID is a cWebForm
+38716>>>            Entry_Item equipo.ID
+38717>>>            Set pbRender to False //Mantiene el ID, pero lo oculta en navegador
+38718>>>            Set piColumnSpan to 2
+38719>>>            Set piColumnSpan to 2
 38720>>>            Set piColumnIndex to 0
 38721>>>            Set peLabelPosition to lpTop
-38722>>>            Set psLabel to "Nombre del equipo"
+38722>>>            Set psLabel to "ID"
 38723>>>        End_Object 
 38724>>>
 38724>>>        Object oligaID is a cWebForm
 38726>>>            Entry_Item liga.ID
-38727>>>            Set pbRender to False //Mantiene el ID, pero lo oculta en navegador
+38727>>>            Set pbRender to False
 38728>>>            Set piColumnSpan to 2
 38729>>>            Set piColumnSpan to 3
 38730>>>            Set piColumnIndex to 0
@@ -3074,8 +3064,8 @@ Including file: ZoomEquipo.wo    (C:\DataFlex Projects\FutbolWebApp\AppSrc\ZoomE
 38732>>>            Set psLabel to "LigaID"
 38733>>>            Set pbPromptButton to True
 38734>>>
-38734>>>// ToDo: Fill in the from-child parent Select view object name for navigate forward
-38734>>>//DESCOMENTADO
+38734>>>            // ToDo: Fill in the from-child parent Select view object name for navigate forward
+38734>>>            
 38734>>>            WebRegisterPath ntNavigateForward oSelectLiga //De equipo (hijo) navegamos a liga (padre)
 38740>>>
 38740>>>            Procedure OnPrompt
@@ -3228,7 +3218,7 @@ Including file: SelectLiga.wo    (C:\DataFlex Projects\FutbolWebApp\AppSrc\Selec
 38858>>>        Set piSortColumn to 0
 38859>>>        
 38859>>>        //AÑADIDO
-38859>>>        WebRegisterPath ntNavigateForwardCustom oZoomLiga
+38859>>>        WebRegisterPath ntNavigateForward oZoomLiga
 38865>>>
 38865>>>        Object oligaID is a cWebColumn
 38867>>>            Entry_Item liga.ID
@@ -3246,7 +3236,6 @@ Including file: SelectLiga.wo    (C:\DataFlex Projects\FutbolWebApp\AppSrc\Selec
 38879>>>            Set peAlign to alignRight
 38880>>>
 38880>>>           // ToDo: Fill in the from-main Zoom view object name for navigate forward
-38880>>>           // DESCOMENTADO
 38880>>>           WebRegisterPath ntNavigateForward oZoomLiga 
 38886>>>
 38886>>>            Procedure OnClick
@@ -3286,11 +3275,6 @@ Including file: SelectLiga.wo    (C:\DataFlex Projects\FutbolWebApp\AppSrc\Selec
 38922>>>            Set piWidth to 124
 38923>>>            Set pbNewLine to False
 38924>>>        End_Object 
-38925>>>
-38925>>>// ToDo: Fill in the from-parent child Select view object name for navigate forward
-38925>>>//        WebRegisterPath ntNavigateForward oSelectView
-38925>>>
-38925>>>       /* Procedure OnRowClick String sRowId            tWebNavigateData NavigateData            Get GetNavigateData to NavigateData            Case Begin                Case (NavigateData.eNavigateType = nfFromParent)// ToDo: Fill in the from-parent child Select view object name for navigate forwardError DFERR_PROGRAM "NavigateForward to this from-parent child Select view not yet defined"//                    Send NavigateForward of oSelectView Self                    Case Break                Case (NavigateData.eNavigateType = nfFromChild)                    Send NavigateClose Self                    Case Break                Case (NavigateData.eNavigateType = nfFromMain)                    Send NavigateClose Self                    Case Break                Case Else // must be nfUndefined// ToDo: Fill in the from-parent child Select view object name for navigate forwardError DFERR_PROGRAM "NavigateForward to this from-parent child Select view not yet defined"//                    Send NavigateForward of oSelectView Self            Case End        End_Procedure        Procedure OnGetNavigateForwardData tWebNavigateData ByRef NavigateData Handle hoToView            Move True to NavigateData.bReadOnly        End_Procedure */
 38925>>>        
 38925>>>        //AÑADIDO
 38925>>>        Procedure OnRowClick String sRowId
@@ -3316,8 +3300,7 @@ Including file: SelectLiga.wo    (C:\DataFlex Projects\FutbolWebApp\AppSrc\Selec
 38946>>>            Set psCaption to "New"
 38947>>>
 38947>>>           // ToDo: Fill in the from-main Zoom view object name for navigate forward
-38947>>>           // DESCOMENTADO y Custom AÑADIDO
-38947>>>           WebRegisterPath ntNavigateForwardCustom oZoomLiga
+38947>>>           WebRegisterPath ntNavigateForward oZoomLiga
 38953>>>
 38953>>>            Procedure OnClick
 38956>>>                Send NavigatePath
@@ -3355,8 +3338,14 @@ Including file: SelectLiga.wo    (C:\DataFlex Projects\FutbolWebApp\AppSrc\Selec
 38982>>>
 38982>>>    End_Procedure
 38983>>>
-38983>>>
 38983>>>End_Object 
+38984>>>
+38984>>>
+38984>>>//CÓDIGO ANTIGUO DATAFLEX
+38984>>>// ToDo: Fill in the from-parent child Select view object name for navigate forward
+38984>>>//        WebRegisterPath ntNavigateForward oSelectView
+38984>>>
+38984>>>       /* Procedure OnRowClick String sRowId            tWebNavigateData NavigateData            Get GetNavigateData to NavigateData            Case Begin                Case (NavigateData.eNavigateType = nfFromParent)// ToDo: Fill in the from-parent child Select view object name for navigate forwardError DFERR_PROGRAM "NavigateForward to this from-parent child Select view not yet defined"//                    Send NavigateForward of oSelectView Self                    Case Break                Case (NavigateData.eNavigateType = nfFromChild)                    Send NavigateClose Self                    Case Break                Case (NavigateData.eNavigateType = nfFromMain)                    Send NavigateClose Self                    Case Break                Case Else // must be nfUndefined// ToDo: Fill in the from-parent child Select view object name for navigate forwardError DFERR_PROGRAM "NavigateForward to this from-parent child Select view not yet defined"//                    Send NavigateForward of oSelectView Self            Case End        End_Procedure        Procedure OnGetNavigateForwardData tWebNavigateData ByRef NavigateData Handle hoToView            Move True to NavigateData.bReadOnly        End_Procedure */
 38984>    Use ZoomLiga.wo
 Including file: ZoomLiga.wo    (C:\DataFlex Projects\FutbolWebApp\AppSrc\ZoomLiga.wo)
 38984>>>// C:\DataFlex Projects\FutbolWebApp\AppSrc\ZoomLiga.wo
@@ -3368,8 +3357,7 @@ Including file: ZoomLiga.wo    (C:\DataFlex Projects\FutbolWebApp\AppSrc\ZoomLig
 38984>>>Use cWebMenuGroup.pkg
 38984>>>Use cWebMenuItem.pkg
 38984>>>Use cWebForm.pkg
-38984>>>Use cWebList.pkg //AÑADIDO para poder hacer listas
-38984>>>Use cWebColumn.pkg //AÑADIDO
+38984>>>
 38984>>>
 38984>>>Use cligaDataDictionary.dd
 38984>>>Use cequipoDataDictionary.dd
@@ -3386,7 +3374,8 @@ Including file: ZoomLiga.wo    (C:\DataFlex Projects\FutbolWebApp\AppSrc\ZoomLig
 38993>>>    Object oliga_DD is a cligaDataDictionary
 38995>>>    End_Object 
 38996>>>    
-38996>>>    Object oequipo_DD is a cequipoDataDictionary
+38996>>>    //Al trabajar de padre a hijo necesitamos los datos de equipo también
+38996>>>    Object oequipo_DD is a cequipoDataDictionary 
 38998>>>        Set DDO_Server to oliga_DD 
 38999>>>    End_Object
 39000>>>
@@ -3399,7 +3388,7 @@ Including file: ZoomLiga.wo    (C:\DataFlex Projects\FutbolWebApp\AppSrc\ZoomLig
 39006>>>
 39006>>>        Object oligaID is a cWebForm
 39008>>>            Entry_Item liga.ID
-39009>>>            Set pbRender to False //Mantiene el ID, pero lo oculta en navegador
+39009>>>            Set pbRender to False 
 39010>>>            Set piColumnSpan to 2
 39011>>>            Set piColumnIndex to 0
 39012>>>            Set peLabelPosition to lpTop
@@ -3449,7 +3438,7 @@ Including file: ZoomLiga.wo    (C:\DataFlex Projects\FutbolWebApp\AppSrc\ZoomLig
 39055>>>                Set piHeight to 250
 39056>>>                Set pbDataAware to True
 39057>>>                
-39057>>>                WebRegisterPath ntNavigateForward oSelectEquipo
+39057>>>                WebRegisterPath ntNavigateForward oSelectEquipo // Viajamos a SelectEquipo para poder relacionarlos
 39063>>>                
 39063>>>                Object oequipoNombre is a cWebColumn
 39065>>>                    Entry_Item equipo.Nombre
@@ -3470,8 +3459,7 @@ Including file: ZoomLiga.wo    (C:\DataFlex Projects\FutbolWebApp\AppSrc\ZoomLig
 39082>>>                Set psCaption to "Ver equipos"
 39083>>>                Set piColumnSpan to 4 
 39084>>>                Set piColumnIndex to 0
-39085>>>                Set psCSSClass to "WebButton" 
-39086>>>                
+39085>>>                Set psCSSClass to "WebButton"                 
 39086>>>
 39086>>>                WebRegisterPath ntNavigateForward oSelectEquipo
 39092>>>
@@ -3608,7 +3596,7 @@ Including file: ZoomLiga.wo    (C:\DataFlex Projects\FutbolWebApp\AppSrc\ZoomLig
 39217>>>        Case End
 39217>>>
 39217>>>        Send SetActionButtons
-39218>>>        Send Rebuild_Constraints of oequipo_DD
+39218>>>        Send Rebuild_Constraints of oequipo_DD // 
 39219>>>        Send SetActionButtons
 39220>>>        WebSet pbRender of oEquiposBtn to True
 39221>>>
@@ -3622,7 +3610,7 @@ Including file: ZoomLiga.wo    (C:\DataFlex Projects\FutbolWebApp\AppSrc\ZoomLig
 39225>Send StartWebApp of oWebApp
 39226>
 Summary
-Memory Available: 15860965376
+Memory Available: 16801333248
 Total Warnings : 0
 Total Errors   : 0
 Total Symbols  : 25635

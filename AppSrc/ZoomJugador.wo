@@ -97,7 +97,7 @@ Object oZoomJugador is a cWebView
                 Set pbPromptButton to True
                 Set pbReadOnly to True 
 
-                WebRegisterPath ntNavigateForward oSelectEquipo
+                WebRegisterPath ntNavigateForward oSelectEquipo // Para ir a SelectEquipo
 
                 Procedure OnPrompt
                     Send NavigatePath
@@ -105,7 +105,7 @@ Object oZoomJugador is a cWebView
             End_Object 
         End_Object 
 
-        // IDs Ocultos (se quedan dentro del panel pero no se ven en navegador, por si queremos relacionar IDs)
+        // Podemos ocultar los ID de la UI pero sin eliminarlos, por si queremos utilizarlos o relacionarlos 
         Object ojugadorID is a cWebForm
             Entry_Item jugador.ID
             Set pbRender to False // Para ocultarlos de la vista en navegador

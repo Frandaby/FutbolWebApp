@@ -35,6 +35,14 @@ Object oZoomEquipo is a cWebView
         Set piColumnCount to 12
         WebSetResponsive piColumnCount rmMobile to 4
 
+        Object oequipoNombre is a cWebForm
+            Entry_Item equipo.Nombre
+            Set piColumnSpan to 12
+            Set piColumnIndex to 0
+            Set peLabelPosition to lpTop
+            Set psLabel to "Nombre del equipo"
+        End_Object 
+           
         Object oequipoID is a cWebForm
             Entry_Item equipo.ID
             Set pbRender to False //Mantiene el ID, pero lo oculta en navegador
@@ -45,17 +53,9 @@ Object oZoomEquipo is a cWebView
             Set psLabel to "ID"
         End_Object 
 
-        Object oequipoNombre is a cWebForm
-            Entry_Item equipo.Nombre
-            Set piColumnSpan to 12
-            Set piColumnIndex to 0
-            Set peLabelPosition to lpTop
-            Set psLabel to "Nombre del equipo"
-        End_Object 
-
         Object oligaID is a cWebForm
             Entry_Item liga.ID
-            Set pbRender to False //Mantiene el ID, pero lo oculta en navegador
+            Set pbRender to False
             Set piColumnSpan to 2
             Set piColumnSpan to 3
             Set piColumnIndex to 0
@@ -63,8 +63,8 @@ Object oZoomEquipo is a cWebView
             Set psLabel to "LigaID"
             Set pbPromptButton to True
 
-// ToDo: Fill in the from-child parent Select view object name for navigate forward
-//DESCOMENTADO
+            // ToDo: Fill in the from-child parent Select view object name for navigate forward
+            
             WebRegisterPath ntNavigateForward oSelectLiga //De equipo (hijo) navegamos a liga (padre)
 
             Procedure OnPrompt
