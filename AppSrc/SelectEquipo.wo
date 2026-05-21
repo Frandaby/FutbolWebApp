@@ -36,12 +36,13 @@ Object oSelectEquipo is a cWebView
         Set psCSSClass to "MobileList"
         Set pbServerOnRowClick to True
         Set pbFillHeight to True
-        Set pbShowHeader to False
+        Set pbShowHeader to True
         Set piSortColumn to 0
         
         WebRegisterPath ntNavigateForward oZoomEquipo
 
         Object oequipoID is a cWebColumn
+            Set pbRender to False
             Entry_Item equipo.ID
             Set psCaption to "equipo.ID"
             Set piWidth to 124
@@ -52,7 +53,7 @@ Object oSelectEquipo is a cWebView
             Set piWidth to 45
             Set pbFixedWidth to True
             Set pbResizable to False
-            Set piListRowSpan to 3
+            Set piListRowSpan to 1
             Set psBtnCssClass to "WebButtonIcon WebIcon_Info"
             Set peAlign to alignRight
 
@@ -71,14 +72,22 @@ Object oSelectEquipo is a cWebView
 
         Object oequipoNombre is a cWebColumn
             Entry_Item equipo.Nombre
-            Set psCaption to "equipo.Nombre"
-            Set piWidth to 1491
+            Set psCaption to "Equipo"
+            Set piWidth to 300
             Set pbNewLine to False
-        End_Object 
+        End_Object        
+                
+        Object oligaNombreCol is a cWebColumn
+            Entry_Item liga.Nombre
+            Set psCaption to "Liga"
+            Set piWidth to 300
+            Set pbNewLine to False
+        End_Object
 
         Object oligaID is a cWebColumn
             Entry_Item liga.ID
             Set psCaption to "equipo.LigaID"
+            Set pbRender to False
             Set piWidth to 124
             Set pbNewLine to False
         End_Object 
@@ -122,6 +131,7 @@ Object oSelectEquipo is a cWebView
     Procedure OnNavigateForward tWebNavigateData NavigateData Integer hoInvokingView Integer hoInvokingObject
         WebSet pbRender of oNewButton to True
         WebSet pbRender of oDetailButton to True
+        
 
         Case Begin
             Case (NavigateData.eNavigateType = nfFromParent)
@@ -130,7 +140,17 @@ Object oSelectEquipo is a cWebView
 
             Case (NavigateData.eNavigateType = nfFromChild)
                 // If from child, this is a probably a parent lookup from a Zoom
-                Case Break
+                String sTipoHijo
+
+                Get NamedValueIndex NavigateData.NamedValues "hijo" to sTipoHijo
+                If (sTipoHijo = "jugador") Begin
+                    
+                End
+                Else Begin 
+                    WebSet pbRender of oligaNombreCol to True
+              
+                End
+            Case Break
 
             Case (NavigateData.eNavigateType = nfFromMain)
                 // If from main, this is a probably a main-file lookup from a Zoom

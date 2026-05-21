@@ -38,7 +38,6 @@ Object oZoomEntrenador is a cWebView
     Set Main_DD To oentrenador_DD
     Set Server  To oentrenador_DD
 
-
     Object oWebMainPanel is a cWebPanel
         Set piColumnCount to 12
         WebSetResponsive piColumnCount rmMobile to 4
@@ -104,6 +103,7 @@ Object oZoomEntrenador is a cWebView
             Procedure OnPrompt
                 Send NavigatePath
             End_Procedure
+            
         End_Object 
         
     End_Object
@@ -150,8 +150,8 @@ Object oZoomEntrenador is a cWebView
             Procedure OnClick
                 Send RefreshRecord
             End_Procedure
-
         End_Object 
+        
     End_Object 
 
     Procedure SetActionButtons
@@ -190,6 +190,13 @@ Object oZoomEntrenador is a cWebView
     End_Procedure
 
     Procedure OnNavigateForward tWebNavigateData NavigateData Integer hoInvokingView Integer hoInvokingObject
+        
+         Boolean bHasRecord
+         Handle hoDD
+         Get Server to hoDD
+         Get HasRecord of hoDD to bHasRecord
+         String sNombre sApellido
+         
         Case Begin
             Case (NavigateData.eNavigateType = nfFromMain)
                 // If from main, this is a propbably a main file Select to Zoom.
@@ -208,6 +215,17 @@ Object oZoomEntrenador is a cWebView
         Case End
 
         Send SetActionButtons
+           
+        //Para mostrar el nombre y apellido del entrenador en vez de ZoomJugador
+        If (bHasRecord) Begin
+            Send SetHeaderCaption ("Entrenador:" * entrenador.Nombre * entrenador.Apellido)
+            Send SetBreadcrumbCaption (entrenador.Nombre * entrenador.Apellido)
+            
+        End
+        Else Begin 
+            Send SetHeaderCaption     "Nuevo entrenador"
+            Send SetBreadcrumbCaption "Nuevo"
+        End
 
     End_Procedure
 

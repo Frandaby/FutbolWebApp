@@ -18,10 +18,10 @@ Use cposicionDataDictionary.dd
 
 Object oZoomJugador is a cWebView
     Set piColumnCount to 12
-    Set psCaption to "ZoomJugador"
+    Set psCaption to "Jugador"
     Set peWebViewStyle to wvsDrilldown
     Set peViewType to vtZoom
-    Set pbShowCaption to False
+    Set pbShowCaption to True
     Set Verify_Save_Msg to 0
     Set piMaxWidth to 1024
 
@@ -86,8 +86,11 @@ Object oZoomJugador is a cWebView
                 WebRegisterPath ntNavigateForward oSelectPosicion //Para ir a otra vista (SlectPosicion)
 
                 Procedure OnPrompt
+                    Forward Send OnPrompt
+                    
                     Send NavigatePath
                 End_Procedure
+                
             End_Object
 
             Object oEquipoNombre_Form is a cWebForm
@@ -100,8 +103,16 @@ Object oZoomJugador is a cWebView
                 WebRegisterPath ntNavigateForward oSelectEquipo // Para ir a SelectEquipo
 
                 Procedure OnPrompt
+                    Forward Send OnPrompt
+                    
                     Send NavigatePath
                 End_Procedure
+                
+                Procedure OnGetNavigateForwardData tWebNavigateData ByRef NavigateData Handle hoToView
+                    Forward Send OnGetNavigateForwardData (NavigateData) hoToView
+                    Get NamedValueAdd NavigateData.NamedValues "hijo" "jugador" to NavigateData.NamedValues
+                End_Procedure
+                
             End_Object 
         End_Object 
 
@@ -115,7 +126,7 @@ Object oZoomJugador is a cWebView
             Set pbRender to False
         End_Object 
         Object oposicionID is a cWebForm
-            Set pbRender to True
+            Set pbRender to False
             Entry_Item posicion.ID
         End_Object 
         
@@ -208,6 +219,10 @@ Object oZoomJugador is a cWebView
     End_Procedure
 
     Procedure OnNavigateForward tWebNavigateData NavigateData Integer hoInvokingView Integer hoInvokingObject
+        Boolean bHasRecord
+        Handle hoDD
+        String sNombre sApellido
+        
         Case Begin
             Case (NavigateData.eNavigateType = nfFromMain)
                 // If from main, this is a propbably a main file Select to Zoom.
@@ -226,7 +241,48 @@ Object oZoomJugador is a cWebView
         Case End
 
         Send SetActionButtons
+        
+        Get Server to hoDD
+        Get HasRecord of hoDD to bHasRecord
 
+        If (bHasRecord) Begin
+            Get Field_Current_Value of hoDD Field jugador.Nombre to sNombre
+            Get Field_Current_Value of hoDD Field jugador.Apellido to sApellido
+            
+            Move (Trim(sNombre)) to sNombre
+            Move (Trim(sApellido)) to sApellido
+
+            Send SetHeaderCaption ("Jugador: " + sNombre + " " + sApellido)
+            Send SetBreadcrumbCaption (sNombre + " " + sApellido)
+        End
+        Else Begin 
+            Send SetHeaderCaption "Nuevo Jugador"
+            Send SetBreadcrumbCaption "Nuevo"
+        End
+
+    End_Procedure
+    
+   
+    Procedure OnGetHeaderCaption String ByRef sCaption String ByRef sSubCaption
+        String sNombre sApellido
+        Boolean bHasRecord
+        Handle hoDD
+        
+        Get Server to hoDD
+        Get HasRecord of hoDD to bHasRecord
+        
+        //Para que se muestre nombres y apellidos en vez de ZoomJugador tal cual
+        If (bHasRecord) Begin
+            Get Field_Current_Value of hoDD Field jugador.Nombre to sNombre
+            Get Field_Current_Value of hoDD Field jugador.Apellido to sApellido
+            
+            Move (Trim(sNombre) + " " + Trim(sApellido)) to sCaption
+            Move "Ficha de Jugador" to sSubCaption
+        End
+        Else Begin
+            Move "Nuevo Jugador" to sCaption
+            Move "" to sSubCaption
+        End
     End_Procedure
 
 End_Object 

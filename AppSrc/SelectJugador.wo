@@ -46,34 +46,6 @@ Object oSelectJugador is a cWebView
         Set piSortColumn to 0
 
         WebRegisterPath ntNavigateForward oZoomJugador
-        
-        Object ojugadorID is a cWebColumn
-            Entry_Item jugador.ID
-            Set psCaption to "jugador.ID"
-            Set piWidth to 124
-        End_Object 
-
-        Object oDetailButton is a cWebColumnButton
-            Set psCaption to "btn"
-            Set piWidth to 45
-            Set pbFixedWidth to True
-            Set pbResizable to False
-            Set piListRowSpan to 5
-            Set psBtnCssClass to "WebButtonIcon WebIcon_Info"
-            Set peAlign to alignRight
-
-           // ToDo: Fill in the from-main Zoom view object name for navigate forward
-           WebRegisterPath ntNavigateForward oZoomJugador
-
-            Procedure OnClick
-                Send NavigatePath
-            End_Procedure
-
-            Procedure OnGetNavigateForwardData tWebNavigateData ByRef NavigateData Handle hoToView
-                Move True to NavigateData.bReadOnly
-            End_Procedure
-
-        End_Object 
 
         Object ojugadorNombre is a cWebColumn
             Entry_Item jugador.Nombre
@@ -96,11 +68,41 @@ Object oSelectJugador is a cWebView
             Set pbNewLine to False
         End_Object 
 
+        Object ojugadorID is a cWebColumn
+            Set pbRender to False
+            Entry_Item jugador.ID
+            Set psCaption to "jugador.ID"
+            Set piWidth to 124
+        End_Object 
+
         Object oequipoID is a cWebColumn
             Entry_Item equipo.ID
+            Set pbRender to False
             Set psCaption to "jugador.EquipoID"
             Set piWidth to 124
             Set pbNewLine to False
+        End_Object 
+        
+        Object oDetailButton is a cWebColumnButton
+            Set psCaption to "btn"
+            Set piWidth to 45
+            Set pbFixedWidth to True
+            Set pbResizable to False
+            Set piListRowSpan to 5
+            Set psBtnCssClass to "WebButtonIcon WebIcon_Info"
+            Set peAlign to alignRight
+
+           // ToDo: Fill in the from-main Zoom view object name for navigate forward
+           WebRegisterPath ntNavigateForward oZoomJugador
+
+            Procedure OnClick
+                Send NavigatePath
+            End_Procedure
+
+            Procedure OnGetNavigateForwardData tWebNavigateData ByRef NavigateData Handle hoToView
+                Move True to NavigateData.bReadOnly
+            End_Procedure
+
         End_Object 
         
         Procedure OnRowClick String sRowId

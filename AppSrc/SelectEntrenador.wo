@@ -71,7 +71,37 @@ Object oSelectEntrenador is a cWebView
             Set peAlign to alignLeft
         End_Object
 
-        Object oDetailButton is a cWebColumnButton     //Invoking Object, para el botón de la lupa
+        Object oentrenadorApellido is a cWebColumn
+            Entry_Item entrenador.Apellido
+            Set psCaption to "entrenador.Apellido"
+            Set piWidth to 745
+            Set pbNewLine to False
+        End_Object 
+
+        Object oentrenadorNacionalidad is a cWebColumn
+            Entry_Item entrenador.Nacionalidad
+            Set psCaption to "entrenador.Nacionalidad"
+            Set piWidth to 621
+            Set pbNewLine to False
+        End_Object 
+
+        Object oequipoID is a cWebColumn
+            Entry_Item equipo.ID
+            Set pbRender to False
+            Set psCaption to "entrenador.EquipoID"
+            Set piWidth to 124
+            Set pbNewLine to False
+        End_Object 
+
+        Object oentrenadorID is a cWebColumn
+            Entry_Item entrenador.ID
+            Set pbRender to False
+            Set psCaption to "entrenador.ID"
+            Set piWidth to 124
+            Set pbNewLine to False
+        End_Object 
+        
+         Object oDetailButton is a cWebColumnButton     //Invoking Object, para el botón de la lupa
             Set psCaption to "btn"
             Set piWidth to 45
             Set pbFixedWidth to True
@@ -91,34 +121,6 @@ Object oSelectEntrenador is a cWebView
                 Move True to NavigateData.bReadOnly // Para que sea solo de lectura
             End_Procedure
 
-        End_Object 
-
-        Object oentrenadorApellido is a cWebColumn
-            Entry_Item entrenador.Apellido
-            Set psCaption to "entrenador.Apellido"
-            Set piWidth to 745
-            Set pbNewLine to False
-        End_Object 
-
-        Object oentrenadorNacionalidad is a cWebColumn
-            Entry_Item entrenador.Nacionalidad
-            Set psCaption to "entrenador.Nacionalidad"
-            Set piWidth to 621
-            Set pbNewLine to False
-        End_Object 
-
-        Object oequipoID is a cWebColumn
-            Entry_Item equipo.ID
-            Set psCaption to "entrenador.EquipoID"
-            Set piWidth to 124
-            Set pbNewLine to False
-        End_Object 
-
-        Object oentrenadorID is a cWebColumn
-            Entry_Item entrenador.ID
-            Set psCaption to "entrenador.ID"
-            Set piWidth to 124
-            Set pbNewLine to False
         End_Object 
         
         Procedure OnRowClick String sRowId

@@ -26,6 +26,7 @@ Object oZoomLiga is a cWebView
     //Al trabajar de padre a hijo necesitamos los datos de equipo también
     Object oequipo_DD is a cequipoDataDictionary 
         Set DDO_Server to oliga_DD 
+        Set Constrain_File to liga.File_Number
     End_Object
 
     Set Main_DD To oliga_DD
@@ -84,7 +85,11 @@ Object oZoomLiga is a cWebView
             //Navega de Liga(Padre) a Equipo (Hijo)
             Object oEquiposList is a cWebList  // 2º En vez del botón, en Zoom liga, los equipos de esa liga
                 Set Server to oequipo_DD
+                
+                Set psCSSClass to "MobileList"
                 Set piHeight to 250
+                Set piSortColumn to 0
+                Set pbShowHeader to True
                 Set pbDataAware to True
                 
                 WebRegisterPath ntNavigateForward oSelectEquipo // Viajamos a SelectEquipo para poder relacionarlos
@@ -92,6 +97,7 @@ Object oZoomLiga is a cWebView
                 Object oequipoNombre is a cWebColumn
                     Entry_Item equipo.Nombre
                     Set psCaption to "Equipos"
+                    Set piWidth to 800
                 End_Object
                 
                 Procedure OnRowClick String sRowId
@@ -223,6 +229,10 @@ Object oZoomLiga is a cWebView
     End_Procedure
 
     Procedure OnNavigateForward tWebNavigateData NavigateData Integer hoInvokingView Integer hoInvokingObject
+        Boolean bHasRecord
+        Handle hoDD
+        String sNombreliga
+        
         Case Begin
             Case (NavigateData.eNavigateType = nfFromMain)
                 // If from main, this is a propbably a main file Select to Zoom.
@@ -242,10 +252,27 @@ Object oZoomLiga is a cWebView
         Case End
 
         Send SetActionButtons
-        Send Rebuild_Constraints of oequipo_DD // 
+        Send Rebuild_Constraints of oliga_DD // 
         Send SetActionButtons
         WebSet pbRender of oEquiposBtn to True
 
+        Get Server to hoDD
+        Get HasRecord of hoDD to bHasRecord //Para obtener el DD
+
+        //Para mostrar el nombre de la liga y no ZoomLiga
+        If (bHasRecord) Begin
+            // Extraemos el nombre de la liga directamente del Data Dictionary
+            Get Field_Current_Value of hoDD Field liga.Nombre to sNombreLiga
+            Move (Trim(sNombreLiga)) to sNombreLiga
+
+            Send SetHeaderCaption ("Liga: " + sNombreLiga)
+            Send SetBreadcrumbCaption sNombreLiga
+        End
+        Else Begin 
+            Send SetHeaderCaption "Nueva liga"
+            Send SetBreadcrumbCaption "Nueva"
+        End
+        
     End_Procedure
     
 End_Object 

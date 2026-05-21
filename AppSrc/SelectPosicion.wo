@@ -42,6 +42,13 @@ Object oSelectPosicion is a cWebView
             Set piWidth to 124
         End_Object 
 
+        Object oposicionNombre is a cWebColumn
+            Entry_Item posicion.Nombre
+            Set psCaption to "posicion.Nombre"
+            Set piWidth to 621
+            Set pbNewLine to False
+        End_Object     
+        
         Object oDetailButton is a cWebColumnButton
             Set psCaption to "btn"
             Set piWidth to 45
@@ -62,13 +69,6 @@ Object oSelectPosicion is a cWebView
                 Move True to NavigateData.bReadOnly
             End_Procedure
 
-        End_Object 
-
-        Object oposicionNombre is a cWebColumn
-            Entry_Item posicion.Nombre
-            Set psCaption to "posicion.Nombre"
-            Set piWidth to 621
-            Set pbNewLine to False
         End_Object 
         
         //AÑADIDO

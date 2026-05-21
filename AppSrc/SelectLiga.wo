@@ -17,7 +17,7 @@ Object oSelectLiga is a cWebView
     Set peViewType to vtSelect
     Set piColumnCount to 12
     Set pbShowCaption to False
-    Set piMaxWidth to 1024
+    Set piMaxWidth to 1000
 
     Object oliga_DD is a cligaDataDictionary
     End_Object 
@@ -37,13 +37,42 @@ Object oSelectLiga is a cWebView
 
         Object oligaID is a cWebColumn
             Entry_Item liga.ID
+            Set pbRender to False
             Set psCaption to "liga.ID"
-            Set piWidth to 124
+            Set piWidth to 0
         End_Object 
 
+        Object oligaNombre is a cWebColumn
+            Entry_Item liga.Nombre
+            Set psCaption to "liga.Nombre"
+            Set piWidth to 400
+            Set pbNewLine to False
+        End_Object 
+
+        Object oligaPais is a cWebColumn
+            Entry_Item liga.Pais
+            Set psCaption to "liga.Pais"
+            Set piWidth to 200
+            Set pbNewLine to False
+        End_Object 
+
+        Object oligaEquipos is a cWebColumn
+            Entry_Item liga.Equipos
+            Set psCaption to "liga.Equipos"
+            Set piWidth to 200
+            Set pbNewLine to False
+        End_Object 
+
+        Object oligaEquiposMax is a cWebColumn
+            Entry_Item liga.EquiposMax
+            Set psCaption to "liga.EquiposMax"
+            Set piWidth to 200
+            Set pbNewLine to False
+        End_Object        
+        
         Object oDetailButton is a cWebColumnButton //El Invoking object
             Set psCaption to "btn"
-            Set piWidth to 45
+            Set piWidth to 200
             Set pbFixedWidth to True
             Set pbResizable to False
             Set piListRowSpan to 5
@@ -61,34 +90,6 @@ Object oSelectLiga is a cWebView
                 Move True to NavigateData.bReadOnly
             End_Procedure
 
-        End_Object 
-
-        Object oligaNombre is a cWebColumn
-            Entry_Item liga.Nombre
-            Set psCaption to "liga.Nombre"
-            Set piWidth to 1243
-            Set pbNewLine to False
-        End_Object 
-
-        Object oligaPais is a cWebColumn
-            Entry_Item liga.Pais
-            Set psCaption to "liga.Pais"
-            Set piWidth to 621
-            Set pbNewLine to False
-        End_Object 
-
-        Object oligaEquipos is a cWebColumn
-            Entry_Item liga.Equipos
-            Set psCaption to "liga.Equipos"
-            Set piWidth to 124
-            Set pbNewLine to False
-        End_Object 
-
-        Object oligaEquiposMax is a cWebColumn
-            Entry_Item liga.EquiposMax
-            Set psCaption to "liga.EquiposMax"
-            Set piWidth to 124
-            Set pbNewLine to False
         End_Object 
         
         Procedure OnRowClick String sRowId

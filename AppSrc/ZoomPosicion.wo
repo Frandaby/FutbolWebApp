@@ -131,6 +131,11 @@ Object oZoomPosicion is a cWebView
     End_Procedure
 
     Procedure OnNavigateForward tWebNavigateData NavigateData Integer hoInvokingView Integer hoInvokingObject
+        
+        Boolean bHasRecord
+        Handle hoDD
+        String sNombrePosicion
+        
         Case Begin
             Case (NavigateData.eNavigateType = nfFromMain)
                 // If from main, this is a propbably a main file Select to Zoom.
@@ -149,6 +154,23 @@ Object oZoomPosicion is a cWebView
         Case End
 
         Send SetActionButtons
+        
+        Get Server to hoDD
+        Get HasRecord of hoDD to bHasRecord
+
+        //Para mostrar nombre de la posición y no ZoomPosicion
+        If (bHasRecord) Begin
+            // Para extraer el nombre de la posición directamente del Data Dictionary
+            Get Field_Current_Value of hoDD Field posicion.Nombre to sNombrePosicion
+            Move (Trim(sNombrePosicion)) to sNombrePosicion
+
+            Send SetHeaderCaption ("Posición: " + sNombrePosicion)
+            Send SetBreadcrumbCaption sNombrePosicion
+        End
+        Else Begin 
+            Send SetHeaderCaption "Nueva posición"
+            Send SetBreadcrumbCaption "Nueva"
+        End
 
     End_Procedure
 
